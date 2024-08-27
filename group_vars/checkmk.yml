@@ -1,0 +1,36 @@
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 smartindent nu ft=yaml
+---
+# CheckMK host from which the compatible agent version will be retrieved.
+checkmk_proto: https
+checkmk_hostname: cmk.clownflare.de
+checkmk_path: "rot/check_mk/agents"
+
+# /etc/hosts.allow:check_mk	:{{ checkmk_ip }} : allow
+checkmk_ip: 0.0.0.0
+
+# Use caching functionality as we don't want to run everything each time the
+# agent gets called upon. Cachetime in seconds represented by 'one' folder.
+# https://docs.checkmk.com/latest/en/localchecks.html
+opn_check_mk_local_checks:
+# twice a day
+  - 43200/pkg_audit.py
+# every 6 hours
+  - 3600/firmware_status.py
+# every hour
+  - 3600/pkg_check.sh
+  - 3600/smart
+# ever half an hour
+  - 1800/crash_status.py
+# every ten minutes
+  - 600/check_powerunit.sh
+# each time
+  - gateways_status.py
+  - pfctl_status.sh
+opn_check_mk_plugins:
+# https://github.com/HeinleinSupport/check_mk_extensions/tree/cmk2.3/wireguard
+# Wireguard shouldn't be cached.
+ - wireguard
+# https://github.com/HeinleinSupport/check_mk_extensions/blob/cmk2.3/postfix_mailq_details/
+# - postfix_mailq_details
+# https://github.com/HeinleinSupport/check_mk_extensions/tree/cmk2.3/rspamd
+# - rspamd

@@ -1,0 +1,33 @@
+--- postfix_mailq_details.orig	2024-08-27 01:45:02.979279000 +0200
++++ postfix_mailq_details	2024-08-27 01:40:21.242404000 +0200
+@@ -1,4 +1,4 @@
+-#!/bin/bash
++#!/usr/bin/env bash
+ # -*- encoding: utf-8
+ 
+ # (c) 2013 Heinlein Support GmbH
+@@ -43,13 +43,13 @@
+ echo '<<<postfix_mailq_details>>>'
+ 
+ for queue in $QUEUES; do
+-    echo $queue total all $( $BIN_FIND $QPATH/$queue -type f 2> /dev/null | $BIN_WC -l ) $( $BIN_DU -sb $QPATH/$queue )
++    echo $queue total all $( $BIN_FIND $QPATH/$queue -type f 2> /dev/null | $BIN_WC -l ) $( $BIN_DU -sA $QPATH/$queue )
+ done
+ 
+ for queue in $QUEUES1; do
+     length=$( $BIN_FIND $QPATH/$queue -type f -cmin $AGE1 2> /dev/null | $BIN_WC -l )
+     if [ $length -gt 0 ]; then
+-        size=$( $BIN_FIND $QPATH/$queue -type f -cmin $AGE1 -print0 2> /dev/null | xargs -0 du -cb 2> /dev/null | grep total | cut -f 1 | paste -sd+ - | bc )
++        size=$( $BIN_FIND $QPATH/$queue -type f -cmin $AGE1 -print0 2> /dev/null | xargs -0 du -cA 2> /dev/null | grep total | cut -f 1 | paste -sd+ - | bc )
+     else
+         size=0
+     fi
+@@ -59,7 +59,7 @@
+ for queue in $QUEUES2; do
+     length=$( $BIN_FIND $QPATH/$queue -type f -cmin $AGE2 2> /dev/null | $BIN_WC -l )
+     if [ $length -gt 0 ]; then
+-        size=$( $BIN_FIND $QPATH/$queue -type f -cmin $AGE2 -print0 2> /dev/null | xargs -0 du -cb 2> /dev/null | grep total | cut -f 1 | paste -sd+ - | bc )
++        size=$( $BIN_FIND $QPATH/$queue -type f -cmin $AGE2 -print0 2> /dev/null | xargs -0 du -cA 2> /dev/null | grep total | cut -f 1 | paste -sd+ - | bc )
+     else
+         size=0
+     fi
