@@ -1,0 +1,61 @@
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 smartindent nu ft=yaml
+---
+# seconds to wait betwen tasks
+opn_plugpack_sleep: 5
+
+# define a list of opnsense plugins to install
+opn_plugins:
+  - os-acme-client
+  - os-cache
+  - os-git-backup
+  - os-haproxy
+  - os-net-snmp
+  - os-nut
+  - os-smart
+  - os-postfix
+  - os-rspamd
+  - os-clamav
+  #  - os-OPNProxy
+  #  - os-apcupsd
+  #  - os-bind
+  #  - os-collectd
+  #  - os-cpu-microcode-amd
+  #  - os-cpu-microcode-intel
+  #  - os-ddclient
+  #  - os-frr
+  #  - os-ftp-proxy
+  #  - os-lldpd
+  #  - os-munin-node
+  #  - os-netdata
+  #  - os-nextcloud-backup
+  #  - os-node_exporter
+  #  - os-nrpe
+  #  - os-ntopng
+  #  - os-puppet-agent
+  #  - os-rfc2136
+  #  - os-squid
+  #  - os-web-proxy-sso
+
+# opnsense plugins to remove
+opn_plugins_remove:
+  - os-dyndns
+  - os-rfc2136
+
+# list pf additional packages to install
+opn_packages:
+  - bash
+  - bash-completion
+  - bind-tools
+  - fping
+  - freeipmi
+  - jq
+  - mtr
+  - rsync
+  - vim
+  - wget
+  - monitoring-plugins
+
+# list of packages to remove
+opn_packages_remove:
+  - ipmitool
+

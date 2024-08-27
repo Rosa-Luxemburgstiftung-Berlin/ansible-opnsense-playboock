@@ -40,7 +40,7 @@
   pre_tasks:
     - name: "save config ..."
       import_role:
-        name: opnsense
+        name: ansible-opnsense
         tasks_from: fetch
       when:
         - not ansible_check_mode
@@ -80,15 +80,15 @@
     ansible_become: no
   roles:
     # ...
-    - role: opnsense-facts
+    - role: ansible-opnsense-facts
       tags:
         - opnsense
         - facts
         - always
-    - role: opnsense # https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-opnsense
+    - role: ansible-opnsense # https://github.com/Rosa-Luxemburgstiftung-Berlin/ansible-opnsense
       tags:
         - opnsense
-    - role: opnsense-checkmk
+    - role: ansible-opnsense-checkmk
       tags:
         - opnsense
         - checkmk
@@ -104,7 +104,7 @@
   post_tasks:
     - name: "save config ..."
       import_role:
-        name: opnsense
+        name: ansible-opnsense
         tasks_from: fetch
       when:
         - not ansible_check_mode
